@@ -2,12 +2,328 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Acceso Comercial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atención al Cliente | ¡Está Rico!</title>
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://i.ytimg.com">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #3f1615;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.94), rgba(248,242,235,0.9)),
+                radial-gradient(circle at top left, rgba(255, 153, 51, 0.25), transparent 34%),
+                radial-gradient(circle at bottom right, rgba(63, 22, 21, 0.14), transparent 36%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+        }
+
+        .support-shell {
+            width: min(1040px, 100%);
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            min-height: 680px;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(63, 22, 21, 0.12);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 28px 80px rgba(63, 22, 21, 0.22);
+        }
+
+        .intro-panel {
+            background: linear-gradient(160deg, #3f1615 0%, #5d211d 58%, #8f3a23 100%);
+            color: #fff;
+            padding: 44px 38px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 32px;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            padding: 9px 13px;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.1);
+            font-size: 0.86rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ff9933;
+            box-shadow: 0 0 0 5px rgba(255, 153, 51, 0.2);
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.02;
+            letter-spacing: 0;
+        }
+
+        .intro-panel p {
+            margin-top: 18px;
+            max-width: 34rem;
+            color: rgba(255,255,255,0.86);
+            font-size: 1.02rem;
+            line-height: 1.55;
+        }
+
+        .steps {
+            display: grid;
+            gap: 13px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 14px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.14);
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #ff9933;
+            color: #3f1615;
+            font-weight: 800;
+            flex: 0 0 auto;
+        }
+
+        .content-panel {
+            padding: 38px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .video-card {
+            border-radius: 18px;
+            overflow: hidden;
+            background: #21100f;
+            box-shadow: 0 18px 45px rgba(63, 22, 21, 0.18);
+            border: 1px solid rgba(63, 22, 21, 0.12);
+        }
+
+        .video-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 18px;
+            background: #fff;
+            color: #3f1615;
+            border-bottom: 1px solid rgba(63, 22, 21, 0.1);
+        }
+
+        .video-header strong {
+            font-size: 1rem;
+        }
+
+        .video-state {
+            min-width: fit-content;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,153,51,0.15);
+            color: #6a271f;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .video-frame {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #111;
+        }
+
+        #tutorialVideo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 12px;
+            min-height: 48px;
+            padding: 0 18px;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            display: none;
+            background: #3f1615;
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(63, 22, 21, 0.24);
+        }
+
+        .btn-primary.visible {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #3f1615;
+            border: 1px solid rgba(63, 22, 21, 0.2);
+        }
+
+        .help-note {
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(255,153,51,0.12);
+            color: #5d211d;
+            line-height: 1.45;
+            border: 1px solid rgba(255,153,51,0.25);
+        }
+
+        .help-note strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 860px) {
+            body {
+                padding: 0;
+                align-items: stretch;
+            }
+
+            .support-shell {
+                min-height: 100vh;
+                grid-template-columns: 1fr;
+                border-radius: 0;
+            }
+
+            .intro-panel,
+            .content-panel {
+                padding: 28px 22px;
+            }
+
+            .intro-panel {
+                justify-content: flex-start;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body style="font-family: Arial; text-align: center; margin-top: 50px;">
-    <h2>Atención al cliente</h2>
-    <button onclick="window.open('https://www.youtube.com/shorts/Dt0AEmxbUz8', '_blank')" style="padding: 10px; background: #28a745; color: #fff; cursor: pointer;">Ver video</button> <br><br>
-    <button onclick="alert('Redirigiendo a captura de datos...')" style="padding: 10px; background: #007bff; color: #fff; cursor: pointer;">Completar Formulario</button> <br><br>
-    <button onclick="window.close()" style="padding: 10px; background: #dc3545; color: #fff; cursor: pointer;">Salir</button>
+<body>
+    <main class="support-shell">
+        <section class="intro-panel" aria-label="Asistencia para máquinas expendedoras">
+            <div>
+                <div class="brand-badge"><span class="status-dot"></span> Atención al cliente</div>
+                <h1>Te ayudamos a resolver el inconveniente con la máquina</h1>
+                <p>Revisá primero el video de asistencia. Al finalizar, si el problema continúa, vas a poder solicitar ayuda adicional.</p>
+            </div>
+
+            <div class="steps" aria-label="Pasos de atención">
+                <div class="step"><span class="step-number">1</span><span>Observá la guía rápida en pantalla.</span></div>
+                <div class="step"><span class="step-number">2</span><span>Verificá el producto, pago y número de canal.</span></div>
+                <div class="step"><span class="step-number">3</span><span>Pedí asistencia si la máquina no responde correctamente.</span></div>
+            </div>
+        </section>
+
+        <section class="content-panel">
+            <div class="video-card">
+                <div class="video-header">
+                    <strong>Guía rápida de asistencia</strong>
+                    <span class="video-state" id="videoState">Reproduciendo</span>
+                </div>
+                <div class="video-frame">
+                    <div id="tutorialVideo"></div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" id="moreHelpBtn" type="button">¿Necesita más ayuda?</button>
+                <button class="btn btn-secondary" type="button" onclick="window.close()">Salir</button>
+            </div>
+
+            <div class="help-note">
+                <strong>Antes de continuar</strong>
+                Tené a mano el producto seleccionado y el número de canal que aparece en la máquina.
+            </div>
+        </section>
+    </main>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        const VIDEO_ID = 'Dt0AEmxbUz8';
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('tutorialVideo', {
+                videoId: VIDEO_ID,
+                playerVars: {
+                    autoplay: 1,
+                    mute: 1,
+                    controls: 1,
+                    playsinline: 1,
+                    rel: 0,
+                    modestbranding: 1
+                },
+                events: {
+                    onReady: (event) => {
+                        event.target.mute();
+                        event.target.playVideo();
+                    },
+                    onStateChange: (event) => {
+                        if (event.data === YT.PlayerState.ENDED) {
+                            document.getElementById('videoState').textContent = 'Video finalizado';
+                            document.getElementById('moreHelpBtn').classList.add('visible');
+                        }
+                    }
+                }
+            });
+        }
+
+        document.getElementById('moreHelpBtn').addEventListener('click', () => {
+            alert('Redirigiendo a captura de datos...');
+        });
+    </script>
 </body>
 </html>
